@@ -4,9 +4,10 @@ import { Pressable, Text, PressableProps } from 'react-native';
 interface OptionButtonProps extends PressableProps {
   label: string;
   selected?: boolean;
+  icon?: React.ReactNode;
 }
 
-export function OptionButton({ label, selected = false, ...props }: OptionButtonProps) {
+export function OptionButton({ label, selected = false, icon, ...props }: OptionButtonProps) {
   return (
     <Pressable
       className={`rounded-lg border-2 px-4 py-3 ${
@@ -15,6 +16,7 @@ export function OptionButton({ label, selected = false, ...props }: OptionButton
           : 'border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800'
       }`}
       {...props}>
+      {icon}
       <Text
         className={`font-medium ${
           selected ? 'text-blue-600 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'

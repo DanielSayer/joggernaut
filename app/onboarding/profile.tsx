@@ -4,6 +4,7 @@ import { OptionButton } from '@/components/ui/option-button';
 import { useOnboardingStore } from '@/stores/onboarding-store';
 import { saveOnboardingData } from '@/utils/onboarding-storage';
 import { useRouter } from 'expo-router';
+import { TurtleIcon } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -57,6 +58,7 @@ function ProfileBasicsScreen() {
             <OptionButton
               key={exp}
               label={exp}
+              icon={<TurtleIcon />}
               selected={localExperience === exp}
               onPress={() => setLocalExperience(exp)}
             />

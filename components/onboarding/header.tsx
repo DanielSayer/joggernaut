@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { MascotImage } from '../mascot-image';
 import { Progress } from '../ui/progress';
+import { Text } from '@/components/ui/text';
 
 interface OnboardingHeaderProps {
   mascot: React.ComponentProps<typeof MascotImage>['type'];
@@ -12,17 +13,20 @@ interface OnboardingHeaderProps {
 
 export function OnboardingHeader({ mascot, title, subtitle, progress }: OnboardingHeaderProps) {
   return (
-    <View className="mb-6">
-      <View className="mb-6 flex items-center">
-        <MascotImage type={mascot} className="h-72 w-48" />
-      </View>
+    <View className="w-full flex-row items-center">
+      <View className="flex-1 items-center">
+        <View className="-mt-4 mb-2 gap-2">
+          <Text variant="h1" className="whitespace-normal text-left">
+            {title}
+          </Text>
+          {subtitle && (
+            <Text className="text-base text-gray-600 dark:text-gray-400">{subtitle}</Text>
+          )}
+        </View>
 
-      <View className="mb-2">
-        <Text className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">{title}</Text>
-        {subtitle && <Text className="text-base text-gray-600 dark:text-gray-400">{subtitle}</Text>}
+        <Progress value={progress} />
       </View>
-
-      <Progress value={progress} />
+      <MascotImage type={mascot} className="h-56 w-36" />
     </View>
   );
 }

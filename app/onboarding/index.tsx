@@ -1,39 +1,46 @@
-import { MascotImage } from '@/components/mascot-image';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View, Image } from 'react-native';
+import { Text } from '@/components/ui/text';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function WelcomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
   return (
-    <ScrollView className="flex-1 bg-white dark:bg-gray-900" bounces={false}>
-      <View
-        className="flex-1 items-center justify-center px-6 py-12"
-        style={{ paddingTop: insets.top + 20 }}>
-        <View className="mb-8 flex items-center">
-          <MascotImage type="cheer" className="h-96 w-64" />
+    <SafeAreaView className="flex-1 bg-background">
+      <View className="flex-1 justify-center">
+        <View className="mt-20 items-center gap-2">
+          <View className="flex-row items-center">
+            <Image source={require('../../assets/logo.png')} className="h-20 w-20" />
+            <Text variant="h1" className="text-5xl tracking-normal" style={{ lineHeight: 70 }}>
+              Joggernaut
+            </Text>
+          </View>
+          <Text className="text-2xl text-muted-foreground">Run relentlessly, with confidence.</Text>
         </View>
-
-        <Text className="mb-4 text-center text-4xl font-bold text-gray-900 dark:text-white">
-          Welcome to CoachAI
-        </Text>
-
-        <Text className="mb-8 text-center text-lg leading-6 text-gray-600 dark:text-gray-400">
-          Your personal running coach is ready to help you reach your goals. Let's get started!
-        </Text>
-
-        <Button
-          onPress={() => router.navigate('/onboarding/profile')}
-          size="lg"
-          className="w-full"
-          text="Get Started"
-        />
       </View>
-    </ScrollView>
+
+      <View className="flex-1 items-center justify-end px-6 py-12">
+        <View className="w-full gap-3">
+          <Button
+            onPress={() => router.navigate('/onboarding/introduction')}
+            size="lg"
+            className="w-full"
+            text="Get Started"
+          />
+          <Button
+            onPress={() => router.navigate('/onboarding/profile')}
+            size="lg"
+            variant="secondary"
+            className="w-full"
+            text="I have an account"
+          />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 

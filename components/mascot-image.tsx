@@ -28,11 +28,6 @@ const mascotMap = {
   wave: require('../assets/mascot-images/mascot-wave.png'),
 };
 
-const LOGO = {
-  light: require('@/assets/images/react-native-reusables-light.png'),
-  dark: require('@/assets/images/react-native-reusables-dark.png'),
-};
-
 export function MascotImage({ type, ...props }: MascotImageProps) {
   return <Image source={mascotMap[type]} {...props} />;
 }
