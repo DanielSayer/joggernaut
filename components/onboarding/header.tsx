@@ -1,8 +1,8 @@
+import { Text } from '@/components/ui/text';
 import React from 'react';
 import { View } from 'react-native';
 import { MascotImage } from '../mascot-image';
 import { Progress } from '../ui/progress';
-import { Text } from '@/components/ui/text';
 
 interface OnboardingHeaderProps {
   mascot: React.ComponentProps<typeof MascotImage>['type'];
@@ -19,9 +19,7 @@ export function OnboardingHeader({ mascot, title, subtitle, progress }: Onboardi
           <Text variant="h1" className="whitespace-normal text-left">
             {title}
           </Text>
-          {subtitle && (
-            <Text className="text-base text-gray-600 dark:text-gray-400">{subtitle}</Text>
-          )}
+          {subtitle && <Text className="text-base text-muted-foreground">{subtitle}</Text>}
         </View>
 
         <Progress value={progress} />

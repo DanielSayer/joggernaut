@@ -1,26 +1,43 @@
+import { Text } from '@/components/ui/text';
+import { useTheme } from '@/hooks/use-theme';
+import { cn } from '@/lib/utils';
+import type { LucideIcon } from 'lucide-react-native';
 import React from 'react';
-import { Pressable, Text, PressableProps } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 
 interface OptionButtonProps extends PressableProps {
   label: string;
   selected?: boolean;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
 }
 
-export function OptionButton({ label, selected = false, icon, ...props }: OptionButtonProps) {
+export function OptionButton({
+  label,
+  selected = false,
+  className,
+  icon: Icon,
+  ...props
+}: OptionButtonProps) {
+  const { primary } = useTheme();
+
   return (
     <Pressable
-      className={`rounded-lg border-2 px-4 py-3 ${
-        selected
-          ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-900'
-          : 'border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800'
-      }`}
+      className={cn(
+        'min-h-20 flex-1 items-center justify-center rounded-lg border-2 px-4 py-3',
+        {
+          'border-primary bg-accent': selected,
+          'border-border bg-card': !selected,
+        },
+        className
+      )}
       {...props}>
-      {icon}
+      {Icon && <Icon color={primary} size={24} />}
       <Text
-        className={`font-medium ${
-          selected ? 'text-blue-600 dark:text-blue-300' : 'text-gray-700 dark:text-gray-300'
-        }`}>
+        variant="small"
+        className={cn('mt-1 font-medium', {
+          'text-accent-foreground': selected,
+          'text-card-foreground': !selected,
+        })}>
         {label}
       </Text>
     </Pressable>

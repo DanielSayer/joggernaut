@@ -1,20 +1,38 @@
 import { OnboardingHeader } from '@/components/onboarding/header';
+import { OnboardingPageWrapper } from '@/components/onboarding/onboarding-page-wrapper';
 import { Button } from '@/components/ui/button';
 import { OptionButton } from '@/components/ui/option-button';
+import { Text } from '@/components/ui/text';
 import { useOnboardingStore } from '@/stores/onboarding-store';
 import { saveOnboardingData } from '@/utils/onboarding-storage';
 import { useRouter } from 'expo-router';
+import {
+  CarIcon,
+  DumbbellIcon,
+  SunIcon,
+  SunriseIcon,
+  SunsetIcon,
+  TrainTrackIcon,
+  TreesIcon,
+} from 'lucide-react-native';
 import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
-const TIME_OPTIONS = ['Morning', 'Afternoon', 'Evening'];
-const TERRAIN_OPTIONS = ['Road', 'Trail', 'Track', 'Treadmill'];
+const TIME_OPTIONS = [
+  { id: 'morning', label: 'Morning', icon: SunriseIcon },
+  { id: 'afternoon', label: 'Afternoon', icon: SunIcon },
+  { id: 'evening', label: 'Evening', icon: SunsetIcon },
+];
+const TERRAIN_OPTIONS = [
+  { id: 'road', label: 'Road', icon: CarIcon },
+  { id: 'trail', label: 'Trail', icon: TreesIcon },
+  { id: 'track', label: 'Track', icon: TrainTrackIcon },
+  { id: 'treadmill', label: 'Treadmill', icon: DumbbellIcon },
+];
 const DISTANCE_OPTIONS = ['1-5 km', '5-10 km', '10+ km'];
 
 function PreferencesScreen() {
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const {
     preferredTimes,
     preferredTerrain,
@@ -57,47 +75,54 @@ function PreferencesScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white dark:bg-gray-900" bounces={false}>
-      <View className="px-6 py-8" style={{ paddingTop: Math.max(insets.top, 16) }}>
-        <OnboardingHeader
-          mascot="happy"
-          title="Your preferences"
-          subtitle="Step 3 of 5"
-          progress={60}
-        />
+    <OnboardingPageWrapper
+      navButtons={
+        <View className="flex-row gap-3">
+          <Button variant="secondary" onPress={handleBack} className="flex-1" text="Back" />
+          <Button onPress={handleNext} className="flex-1" text="Next" />
+        </View>
+      }>
+      <OnboardingHeader
+        mascot="happy"
+        title="Your preferences"
+        subtitle="Step 3 of 5"
+        progress={60}
+      />
 
-        <Text className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-          When do you prefer to run?
-        </Text>
-        <View className="mb-8 gap-3">
-          {TIME_OPTIONS.map((time) => (
+      <View className="mb-8 gap-3">
+        <Text variant="large">When do you prefer to run?</Text>
+        <View className="flex-row gap-3">
+          {TIME_OPTIONS.map((exp) => (
             <OptionButton
-              key={time}
-              label={time}
-              selected={localTimes.includes(time)}
-              onPress={() => toggleTime(time)}
+              key={exp.id}
+              label={exp.label}
+              icon={exp.icon}
+              selected={localTimes.includes(exp.id)}
+              onPress={() => toggleTime(exp.id)}
             />
           ))}
         </View>
+      </View>
 
-        <Text className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-          Preferred terrain
-        </Text>
-        <View className="mb-8 gap-3">
-          {TERRAIN_OPTIONS.map((terrain) => (
-            <OptionButton
-              key={terrain}
-              label={terrain}
-              selected={localTerrain.includes(terrain)}
-              onPress={() => toggleTerrain(terrain)}
-            />
+      <View className="mb-8 gap-3">
+        <Text variant="large">Preferred terrain</Text>
+        <View className="w-full flex-row flex-wrap gap-3">
+          {TERRAIN_OPTIONS.map((exp) => (
+            <View key={exp.id} style={{ width: '48%' }}>
+              <OptionButton
+                label={exp.label}
+                icon={exp.icon}
+                selected={localTerrain.includes(exp.id)}
+                onPress={() => toggleTerrain(exp.id)}
+              />
+            </View>
           ))}
         </View>
+      </View>
 
-        <Text className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-          Typical running distance
-        </Text>
-        <View className="mb-8 gap-3">
+      <View className="gap-3">
+        <Text variant="large">Typical running distance</Text>
+        <View className="flex-row gap-3">
           {DISTANCE_OPTIONS.map((distance) => (
             <OptionButton
               key={distance}
@@ -107,13 +132,8 @@ function PreferencesScreen() {
             />
           ))}
         </View>
-
-        <View className="mb-8 flex-row gap-3">
-          <Button variant="secondary" onPress={handleBack} className="flex-1" text="Back" />
-          <Button onPress={handleNext} className="flex-1" text="Next" />
-        </View>
       </View>
-    </ScrollView>
+    </OnboardingPageWrapper>
   );
 }
 

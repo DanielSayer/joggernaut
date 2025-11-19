@@ -1,28 +1,38 @@
 import { MascotImage } from '@/components/mascot-image';
 import { Button } from '@/components/ui/button';
-import { markOnboardingComplete } from '@/utils/onboarding-storage';
+import { Text } from '@/components/ui/text';
 import { useRouter } from 'expo-router';
-import React, { useEffect } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import React, { useRef } from 'react';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import confettiAnimation from '@/assets/animations/confetti.json';
 
 function OnboardingCompleteScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-
-  useEffect(() => {
-    const completeOnboarding = async () => {
-      await markOnboardingComplete();
-    };
-    completeOnboarding();
-  }, []);
+  const confettiRef = useRef<LottieView>(null);
 
   const handleGoHome = () => {
     router.navigate('/');
   };
 
   return (
-    <ScrollView className="flex-1 bg-white dark:bg-gray-900" bounces={false}>
+    <View className="flex-1 bg-background">
+      <LottieView
+        ref={confettiRef}
+        source={confettiAnimation}
+        autoPlay={true}
+        loop={false}
+        style={{
+          position: 'absolute',
+          zIndex: -1,
+          width: '100%',
+          height: '100%',
+        }}
+      />
+
       <View
         className="flex-1 items-center justify-center px-6 py-12"
         style={{ paddingTop: insets.top + 20 }}>
@@ -30,19 +40,16 @@ function OnboardingCompleteScreen() {
           <MascotImage type="proud" className="h-96 w-64" />
         </View>
 
-        <Text className="mb-4 text-center text-4xl text-gray-900 dark:text-white">✓</Text>
-
-        <Text className="mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white">
+        <Text variant="h1" className="mb-2">
           You're all set!
         </Text>
-
-        <Text className="mb-8 text-center text-lg leading-6 text-gray-600 dark:text-gray-400">
-          Your AI coach is ready to guide you on your running journey.
+        <Text variant="lead" className="text-center">
+          Get personalized running plans, real-time coaching, and track your progress.
         </Text>
 
-        <Button onPress={handleGoHome} className="w-full" size="lg" text="Go to running home" />
+        <Button onPress={handleGoHome} className="mt-4 w-full" size="lg" text="Start Running" />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

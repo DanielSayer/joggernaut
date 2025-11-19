@@ -1,14 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'expo-router';
-import React from 'react';
-import { View, Image } from 'react-native';
 import { Text } from '@/components/ui/text';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
+import React from 'react';
+import { Image, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function WelcomeScreen() {
-  const router = useRouter();
-  const insets = useSafeAreaInsets();
-
   return (
     <SafeAreaView className="flex-1 bg-background">
       <View className="flex-1 justify-center">
@@ -23,21 +20,14 @@ function WelcomeScreen() {
         </View>
       </View>
 
-      <View className="flex-1 items-center justify-end px-6 py-12">
-        <View className="w-full gap-3">
-          <Button
-            onPress={() => router.navigate('/onboarding/introduction')}
-            size="lg"
-            className="w-full"
-            text="Get Started"
-          />
-          <Button
-            onPress={() => router.navigate('/onboarding/profile')}
-            size="lg"
-            variant="secondary"
-            className="w-full"
-            text="I have an account"
-          />
+      <View className="gap-3 px-6 pb-12">
+        <View className="gap-3">
+          <Link href="/onboarding/introduction" asChild>
+            <Button size="lg" className="w-full" text="Get Started" />
+          </Link>
+          <Link href="/onboarding/profile" asChild>
+            <Button size="lg" variant="secondary" className="w-full" text="I have an account" />
+          </Link>
         </View>
       </View>
     </SafeAreaView>

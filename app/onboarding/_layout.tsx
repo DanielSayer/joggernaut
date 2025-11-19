@@ -9,6 +9,7 @@ export default function OnboardingLayout() {
       <Stack.Screen name="injuryHistory" options={{ headerShown: false }} />
       <Stack.Screen name="preferences" options={{ headerShown: false }} />
       <Stack.Screen name="connect" options={{ headerShown: false }} />
+      <Stack.Screen name="account" options={{ headerShown: false }} />
       <Stack.Screen name="complete" options={{ headerShown: false }} />
     </Stack>
   );
