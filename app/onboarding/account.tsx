@@ -3,7 +3,7 @@ import { OnboardingPageWrapper } from '@/components/onboarding/onboarding-page-w
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -19,7 +19,9 @@ function AccountScreen() {
       navButtons={
         <View className="w-full flex-row gap-3">
           <Button variant="secondary" onPress={handleBack} className="flex-1" text="Back" />
-          <Button className="flex-1" text="Next" />
+          <Link asChild href="/">
+            <Button className="flex-1" text="Next" />
+          </Link>
         </View>
       }>
       <OnboardingHeader

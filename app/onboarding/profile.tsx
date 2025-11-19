@@ -9,8 +9,8 @@ import { useRouter } from 'expo-router';
 import {
   ActivityIcon,
   BatteryIcon,
+  BicepsFlexedIcon,
   CalendarDaysIcon,
-  DumbbellIcon,
   HeartIcon,
   RabbitIcon,
   RulerIcon,
@@ -31,7 +31,7 @@ const GOAL_OPTIONS = [
   { id: 'distance', label: 'Distance', icon: RulerIcon },
   { id: 'consistency', label: 'Consistency', icon: CalendarDaysIcon },
   { id: 'endurance', label: 'Endurance', icon: BatteryIcon },
-  { id: 'strength', label: 'Strength', icon: DumbbellIcon },
+  { id: 'strength', label: 'Strength', icon: BicepsFlexedIcon },
   { id: 'health', label: 'Health', icon: HeartIcon },
 ];
 
