@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { useRouter } from 'expo-router';
 import LottieView from 'lottie-react-native';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -15,7 +15,7 @@ function OnboardingCompleteScreen() {
   const confettiRef = useRef<LottieView>(null);
 
   const handleGoHome = () => {
-    router.navigate('/');
+    router.navigate('/(tabs)');
   };
 
   return (
@@ -27,7 +27,6 @@ function OnboardingCompleteScreen() {
         loop={false}
         style={{
           position: 'absolute',
-          zIndex: -1,
           width: '100%',
           height: '100%',
         }}

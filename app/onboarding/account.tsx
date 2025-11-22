@@ -19,7 +19,7 @@ function AccountScreen() {
       navButtons={
         <View className="w-full flex-row gap-3">
           <Button variant="secondary" onPress={handleBack} className="flex-1" text="Back" />
-          <Link asChild href="/">
+          <Link asChild href="/onboarding/complete">
             <Button className="flex-1" text="Next" />
           </Link>
         </View>
