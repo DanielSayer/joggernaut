@@ -13,7 +13,7 @@ import {
 } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // --- MOCK DATA TYPES ---
 type WorkoutStatus = 'completed' | 'skipped' | 'upcoming';
@@ -213,19 +213,17 @@ const WorkoutHeroCard = ({ date, data }: { date: string; data?: WorkoutDetails }
 
 // --- MAIN SCREEN ---
 export default function ScheduleScreen() {
-  const insets = useSafeAreaInsets();
   const [selectedDate, setSelectedDate] = useState('2025-01-23');
 
   const selectedWorkout = WORKOUTS[selectedDate];
 
   return (
-    <View className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background">
       <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: 100,
-          paddingTop: Math.max(insets.top, 16),
         }}>
         {/* 1. Header & Week Switcher */}
         <View className="mb-6 flex-row items-end justify-between px-6">
@@ -305,6 +303,6 @@ export default function ScheduleScreen() {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
