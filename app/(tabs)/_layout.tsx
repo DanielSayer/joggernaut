@@ -1,6 +1,6 @@
 import { useTheme } from '@/hooks/use-theme';
 import { Tabs } from 'expo-router';
-import { HomeIcon } from 'lucide-react-native';
+import { CalendarDaysIcon, HomeIcon } from 'lucide-react-native';
 import React from 'react';
 
 export default function TabsLayout() {
@@ -14,6 +14,14 @@ export default function TabsLayout() {
           headerShown: false,
           title: 'Home',
           tabBarIcon: ({ color }) => <HomeIcon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          headerShown: false,
+          title: 'Schedule',
+          tabBarIcon: ({ color }) => <CalendarDaysIcon color={color} />,
         }}
       />
     </Tabs>

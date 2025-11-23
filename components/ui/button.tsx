@@ -14,23 +14,23 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: cn(
-          'active:bg-primary/90 bg-primary shadow-sm shadow-black/5',
+          'active:bg-primary/90 bg-primary shadow-black/5',
           Platform.select({ web: 'hover:bg-primary/90' })
         ),
         destructive: cn(
-          'active:bg-destructive/90 dark:bg-destructive/60 bg-destructive shadow-sm shadow-black/5',
+          'active:bg-destructive/90 dark:bg-destructive/60 bg-destructive shadow-black/5',
           Platform.select({
             web: 'hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
           })
         ),
         outline: cn(
-          'dark:bg-input/30 dark:active:bg-input/50 border border-border bg-background shadow-sm shadow-black/5 active:bg-accent dark:border-input',
+          'dark:bg-input/30 dark:active:bg-input/50 border border-border bg-background shadow-black/5 active:bg-accent dark:border-input',
           Platform.select({
             web: 'dark:hover:bg-input/50 hover:bg-accent',
           })
         ),
         secondary: cn(
-          'active:bg-secondary/80 bg-secondary shadow-sm shadow-black/5',
+          'active:bg-secondary/80 bg-secondary shadow-black/5',
           Platform.select({ web: 'hover:bg-secondary/80' })
         ),
         ghost: cn(

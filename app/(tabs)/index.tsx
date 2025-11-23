@@ -1,24 +1,19 @@
+import StravaProgressChart from '@/components/progress-graph';
+import { Text } from '@/components/ui/text';
+import { useTheme } from '@/hooks/use-theme';
+import { Link } from 'expo-router';
 import {
   CalendarIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  MapPinIcon,
   PlayIcon,
   RefreshCwIcon,
   TargetIcon,
-  TrendingUpIcon,
-  TrophyIcon,
   ZapIcon,
 } from 'lucide-react-native';
 import React, { useMemo, useState } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-// Re-using your existing UI primitives or mocking standard ones
-import StravaProgressChart from '@/components/progress-graph';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-import { useTheme } from '@/hooks/use-theme';
 
 type Goal = {
   id: string;
@@ -67,26 +62,6 @@ const MOCK_GOALS: Goal[] = [
   },
 ];
 
-// --- SUB-COMPONENTS ---
-
-// A simple progress bar component matching the theme
-const ProgressBar = ({
-  current,
-  total,
-  colorClass = 'bg-primary',
-}: {
-  current: number;
-  total: number;
-  colorClass?: string;
-}) => {
-  const percentage = Math.min(100, Math.max(0, (current / total) * 100));
-  return (
-    <View className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-      <View className={`h-full ${colorClass}`} style={{ width: `${percentage}%` }} />
-    </View>
-  );
-};
-
 // --- MAIN SCREEN ---
 
 export default function DashboardScreen() {
@@ -103,7 +78,7 @@ export default function DashboardScreen() {
           <Text className="text-sm font-medium text-muted-foreground">Welcome back,</Text>
           <Text className="text-2xl font-bold text-foreground">Hugh Mongus</Text>
         </View>
-        <TouchableOpacity className="rounded-full bg-secondary p-3 shadow-sm active:scale-95">
+        <TouchableOpacity className="rounded-full bg-secondary p-3 active:scale-95">
           <RefreshCwIcon size={20} className="text-primary" />
         </TouchableOpacity>
       </View>
@@ -127,7 +102,7 @@ export default function DashboardScreen() {
             </TouchableOpacity>
           </View>
 
-          <View className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+          <View className="overflow-hidden rounded-3xl border border-border bg-card">
             {/* Top Section: Stats & Map Placeholder */}
             <View className="p-5 pb-6">
               <View className="mb-4 flex-row items-start justify-between">
@@ -167,7 +142,7 @@ export default function DashboardScreen() {
             </View>
 
             <View className="flex-row items-start gap-4 border-t border-border bg-muted p-5">
-              <View className="h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-border bg-red-300 shadow-sm">
+              <View className="h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-border bg-red-300">
                 <Image
                   source={{ uri: 'https://i.imgur.com/placeholder-rabbit.png' }}
                   className="h-10 w-10"
@@ -203,7 +178,7 @@ export default function DashboardScreen() {
             {UPCOMING_WORKOUTS.map((workout) => (
               <View
                 key={workout.id}
-                className="flex-row items-center rounded-2xl border border-border bg-card p-4 shadow-sm">
+                className="flex-row items-center rounded-2xl border border-border bg-card p-4">
                 <View className="mr-4 h-12 w-12 items-center justify-center rounded-xl bg-secondary">
                   <CalendarIcon size={20} className="text-foreground" />
                 </View>
@@ -215,9 +190,11 @@ export default function DashboardScreen() {
                     <Text className="text-xs text-muted-foreground">{workout.duration}</Text>
                   </View>
                 </View>
-                <TouchableOpacity className="bg-primary/10 h-10 w-10 items-center justify-center rounded-full">
-                  <PlayIcon size={18} className="ml-0.5 text-primary" />
-                </TouchableOpacity>
+                <Link asChild href={{ pathname: '/workouts/[id]', params: { id: workout.id } }}>
+                  <TouchableOpacity className="bg-primary/10 h-10 w-10 items-center justify-center rounded-full">
+                    <PlayIcon size={18} className="ml-0.5 text-primary" />
+                  </TouchableOpacity>
+                </Link>
               </View>
             ))}
           </View>
@@ -247,7 +224,7 @@ function GoalProgressSection() {
   const hasGoals = goalsWithProgress.length > 0;
 
   return (
-    <View className="mb-4 rounded-3xl border border-border bg-card p-4 shadow-sm">
+    <View className="mb-4 rounded-3xl border border-border bg-card p-4">
       <TouchableOpacity
         activeOpacity={0.8}
         className="mb-2 flex-row items-center justify-between"

@@ -7,6 +7,7 @@ type MascotVariants =
   | 'idle'
   | 'point'
   | 'proud'
+  | 'sleep'
   | 'stern'
   | 'think'
   | 'thumbsup'
@@ -22,6 +23,7 @@ const mascotMap = {
   idle: require('../assets/mascot-images/mascot-idle.png'),
   point: require('../assets/mascot-images/mascot-point.png'),
   proud: require('../assets/mascot-images/mascot-proud.png'),
+  sleep: require('../assets/mascot-images/mascot-sleep.png'),
   stern: require('../assets/mascot-images/mascot-stern.png'),
   think: require('../assets/mascot-images/mascot-think.png'),
   thumbsup: require('../assets/mascot-images/mascot-thumbsup.png'),

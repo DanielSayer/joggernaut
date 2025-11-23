@@ -1,6 +1,6 @@
 import { Text } from '@/components/ui/text';
 import { useTheme } from '@/hooks/use-theme';
-import { addDays, endOfWeek, format, isSameMonth, parse, startOfWeek } from 'date-fns';
+import { endOfWeek, format, isSameMonth, parse, startOfWeek } from 'date-fns';
 import React, { useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
